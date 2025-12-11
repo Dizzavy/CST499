@@ -1,6 +1,9 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
-if (session_status() === PHP_SESSION_NONE) session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +21,7 @@ if (session_status() === PHP_SESSION_NONE) session_start();
     <h1>CST499 - Student System</h1>
   </div>
 </div>
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -28,24 +32,38 @@ if (session_status() === PHP_SESSION_NONE) session_start();
       </button>
       <a class="navbar-brand" href="/cst499/index.php">CST499</a>
     </div>
+
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li><a href="/cst499/index.php"><span class="glyphicon glyphicon-home"></span> Home</a></li>
         <li><a href="/cst499/about.php"><span class="glyphicon glyphicon-exclamation-sign"></span> About</a></li>
         <li><a href="/cst499/contact.php"><span class="glyphicon glyphicon-earphone"></span> Contact</a></li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
-        <?php if (!empty($_SESSION['user'])): ?>
+
+        <?php if (!empty($_SESSION['username'])): ?>
+
           <li><a href="/cst499/register_class.php"><span class="glyphicon glyphicon-education"></span> Enroll</a></li>
           <li><a href="/cst499/my_classes.php"><span class="glyphicon glyphicon-briefcase"></span> My Classes</a></li>
           <li><a href="/cst499/waitlist.php"><span class="glyphicon glyphicon-time"></span> Waitlist</a></li>
-          <li><a href="/cst499/logout.php?Logout=1"><span class="glyphicon glyphicon-off"></span> Logout (<?=htmlspecialchars($_SESSION['user'])?>)</a></li>
+          <li>
+            <a href="/cst499/logout.php?Logout=1">
+              <span class="glyphicon glyphicon-off"></span> 
+              Logout (<?= htmlspecialchars($_SESSION['username']) ?>)
+            </a>
+          </li>
+
         <?php else: ?>
+
           <li><a href="/cst499/login.php"><span class="glyphicon glyphicon-user"></span> Login</a></li>
           <li><a href="/cst499/register.php"><span class="glyphicon glyphicon-pencil"></span> Register</a></li>
+
         <?php endif; ?>
+
       </ul>
     </div>
   </div>
 </nav>
+
 <div class="container">
